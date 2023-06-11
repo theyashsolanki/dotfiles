@@ -113,6 +113,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 source ~/script/tmux_sessionizer.sh
+source ~/script/tmux_session_switcher.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -130,6 +131,8 @@ zle -N tmux_sessionizer
 bindkey '^f' tmux_sessionizer
 
 
+zle -N tmux_session_switcher
+bindkey '^s' tmux_session_switcher
 
 # autojump
 [[ -s /home/yash/.autojump/etc/profile.d/autojump.sh ]] && source /home/yash/.autojump/etc/profile.d/autojump.sh
