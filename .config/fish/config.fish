@@ -41,6 +41,23 @@ if status --is-interactive
 end
 
 
+# tmux
+# if tmux has-session >/dev/null 2>&1; and test -z $TMUX
+#     tmux attach
+# end
+
+
+# tmux_sessionizer
+function tmux_sessionizer
+    bash ~/personal/script/tmux_sessionizer.sh
+end
+
+# tmux session switcher
+function tmux_session_switcher
+    bash ~/personal/script/tmux_session_switcher.sh
+end
+
+
 ## Advanced command-not-found hook
 source /usr/share/doc/find-the-command/ftc.fish
 
@@ -110,6 +127,7 @@ alias cat='bat --style header --style snip --style changes --style header'
 
 # Common use
 alias vim=nvim
+alias c='clear'
 alias grubup="sudo update-grub"
 alias fixpacman="sudo rm /var/lib/pacman/db.lck"
 alias tarnow='tar -acf '
@@ -154,9 +172,12 @@ alias jctl="journalctl -p 3 -xb"
 # Recent installed packages
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 
+# bash scripts
+bind \cf tmux_sessionizer
+bind \cs tmux_session_switcher
 
 ## Run fastfetch if session is interactive
-# if status --is-interactive && type -q fastfetch
-#    fastfetch --load-config garuda
-# end
+#if status --is-interactive && type -q fastfetch
+#   fastfetch --load-config garuda
+#end
 zoxide init fish | source

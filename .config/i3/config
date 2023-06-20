@@ -21,9 +21,9 @@ set $lockScreenWallpaper /usr/share/wallpapers/garuda-wallpapers/Garuda-Desert.p
 ### Applications: ###
 
 set $preferredTerminalEmulator /usr/bin/kitty
-set $preferredBrowser /usr/bin/firedragon
+set $preferredBrowser /usr/bin/firefox
 set $preferredFileManager /usr/bin/thunar
-set $preferredMailClient /usr/bin/geary
+set $preferredMailClient /usr/bin/thunderbird
 set $preferredTextEditor /usr/bin/geany
 set $preferredScreenCaptureTool /usr/bin/flameshot gui
 
@@ -71,7 +71,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xfce4-power-manager
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id setcursor
-#exec_always --no-startup-id ${HOME}/.config/polybar/launch.sh
+exec_always --no-startup-id ${HOME}/.config/polybar/launch.sh
 exec_always --no-startup-id numlockx on
 exec blueberry-tray
 exec --no-startup-id java -Xmx1024m -jar "/opt/xdman/xdman.jar" -m
@@ -384,13 +384,16 @@ mode "$mode_system" {
 # keybindings for applications
 bindsym $super+b exec --no-startup-id brave
 
-# custom autostart
-exec_always ~/.config/polybar/launch.sh &
-exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/kitty'
-exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/firedragon'
-exec --no-startup-id i3-msg 'workspace 3; exec /usr/bin/thunar'
+# disable ctrl+d
+# bindsym Ctrl+d mode "default"
 
-# workspace bindings for num
+# custom autostart
+# exec_always ~/.config/polybar/launch.sh &
+exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/kitty -e tmux attach || /usr/bin/kitty'
+exec --no-startup-id i3-msg 'workspace 2; exec /usr/bin/firefox'
+# exec --no-startup-id i3-msg 'workspace 3; exec /usr/bin/thunar'
+
+# workspace bindings for num keys
 bindcode $super+87 workspace 1
 bindcode $super+88 workspace 2
 bindcode $super+89 workspace 3
@@ -402,16 +405,43 @@ bindcode $super+80 workspace 8
 bindcode $super+81 workspace 9
 bindcode $super+90 workspace 10
 
+# move focused container to workspace for num keys
+bindcode $super+Shift+87 move container to workspace 1
+bindcode $super+Shift+88 move container to workspace 2
+bindcode $super+Shift+89 move container to workspace 3
+bindcode $super+Shift+83 move container to workspace 4
+bindcode $super+Shift+84 move container to workspace 5
+bindcode $super+Shift+85 move container to workspace 6
+bindcode $super+Shift+79 move container to workspace 7
+bindcode $super+Shift+80 move container to workspace 8
+bindcode $super+Shift+81 move container to workspace 9
+bindcode $super+Shift+90 move container to workspace 10
+
+# Move to workspace with focused container for num keys
+bindcode $alt+Shift+87 move container to workspace 1; workspace 1
+bindcode $alt+Shift+88 move container to workspace 2; workspace 2
+bindcode $alt+Shift+89 move container to workspace 3; workspace 3
+bindcode $alt+Shift+83 move container to workspace 4; workspace 4
+bindcode $alt+Shift+84 move container to workspace 5; workspace 5
+bindcode $alt+Shift+85 move container to workspace 6; workspace 6
+bindcode $alt+Shift+79 move container to workspace 7; workspace 7
+bindcode $alt+Shift+80 move container to workspace 8; workspace 8
+bindcode $alt+Shift+81 move container to workspace 9; workspace 9
+bindcode $alt+Shift+90 move container to workspace 10; workspace 10
+
 # scratchpad
-set $scratchpad_id 0
+# set $scratchpad_id 0
 for_window [class="dropdown*"] floating enable 
 for_window [class="dropdown*"] resize set 800 800
 for_window [class="dropdown*"] move scratchpad
 for_window [class="dropdown*"] border pixel 5
 exec --no-startup-id kitty --class dropdown1
-bindcode $super+Ctrl+87 [class="dropdown1"] scratchpad show; [class="dropdown1"] move position center
+bindsym $super+bracketleft [class="dropdown1"] scratchpad show; [class="dropdown1"] move position center
 
 exec --no-startup-id kitty --class dropdown2 -e htop
-bindcode $super+Ctrl+88 [class="dropdown2"] scratchpad show; [class="dropdown2"] move position center
+bindsym $super+Shift+parenright [class="dropdown2"] scratchpad show; [class="dropdown2"] move position center
+
+# exec --no-startup-id thunar --class dropdown3
+# bindsym $super+Shift+less [class="dropdown3"] scratchpad show; [class="dropdown3"] move position center
 
 
