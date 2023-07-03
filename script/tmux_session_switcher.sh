@@ -1,8 +1,7 @@
 #!/bin/bash
 
-
-# Use fzf with preview to select a session
-selected_session=$(tmux ls | fzf --preview 'tmux list-windows -t {1} -F "#I:#W (#{session_width}x#{session_height}) - #{window_panes} panes - #{?window_active,active,}"')
+# Use fzf with customized preview to select a session
+selected_session=$(tmux list-sessions -F "#{?session_attached,#{session_name} (attached),#{session_name}}" | fzf --preview 'tmux list-windows -t {1} -F "#I: #W - #{window_panes} pane (#{?window_active,active,})"' --preview-window 'up:40%:wrap')
 
 # Check if a session was selected
 if [[ -z $selected_session ]]; then

@@ -19,7 +19,7 @@ switch_session() {
 if [[ $# -eq 1 ]]; then
   selected="$1"
 else
-  selected=$(find ~ -type d | fzf --preview="exa -al {}")
+  selected=$(find ~ -type d | fzf --preview="exa -1a --group-directories-first {}")
 fi
 
 # Check if selection is empty
