@@ -14,7 +14,8 @@ tmux_sessionizer() {
   tmux_running=$(pgrep tmux)
 
   if [[ -z $TMUX ]] ; then
-    tmux new -s $selected_name -c $selected
+    BUFFER="tmux new -s $selected_name -c $selected"
+    zle accept-line
   else
     if ! tmux has-session -t=$selected_name 2> /dev/null; then
       tmux new-session -ds $selected_name -c $selected
@@ -25,4 +26,3 @@ tmux_sessionizer() {
 }
 
 export -f tmux_sessionizer 2>/dev/null
-

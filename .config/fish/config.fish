@@ -126,8 +126,10 @@ alias cat='bat --style header --style snip --style changes --style header'
 [ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
 
 # Common use
+alias rm='trash -v'
 alias vim=nvim
 alias c='clear'
+alias cb='bash ~/personal/script/bluetooth_connect.sh'
 alias grubup="sudo update-grub"
 alias fixpacman="sudo rm /var/lib/pacman/db.lck"
 alias tarnow='tar -acf '

@@ -71,7 +71,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xfce4-power-manager
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id setcursor
-exec_always --no-startup-id ${HOME}/.config/polybar/launch.sh
+# exec_always --no-startup-id ${HOME}/.config/polybar/launch.sh
 exec_always --no-startup-id numlockx off
 exec blueberry-tray
 exec --no-startup-id java -Xmx1024m -jar "/opt/xdman/xdman.jar" -m
@@ -242,24 +242,24 @@ bindsym $super+y border pixel 1
 # panel
 # Start i3bar to display a workspace bar
 
-# bar {
-# 	status_command exec /usr/bin/net-speed.sh
-# 	#strip_workspace_numbers yes|no
-# 	#strip_workspace_name yes|no
-# 	colors {
-#     background #2f343f
-#     statusline #FFFFFF
-#     separator  #666666
-#
-#     focused_workspace  #4C7899 #285577 #FFFFFF
-#     active_workspace   #333333 #222222 #FFFFFF
-#     inactive_workspace #333333 #222222 #888888
-#     urgent_workspace   #2F343A #900000 #FFFFFF
-#     #binding_mode      #2F343A #900000 #FFFFFF
-#     # colour of border, background, and text
-#     }
-#
-# }
+bar {
+	status_command exec /usr/bin/net-speed.sh
+	#strip_workspace_numbers yes|no
+	#strip_workspace_name yes|no
+	colors {
+    background #2f343f
+    statusline #FFFFFF
+    separator  #666666
+
+    focused_workspace  #4C7899 #285577 #FFFFFF
+    active_workspace   #333333 #222222 #FFFFFF
+    inactive_workspace #333333 #222222 #888888
+    urgent_workspace   #2F343A #900000 #FFFFFF
+    #binding_mode      #2F343A #900000 #FFFFFF
+    # colour of border, background, and text
+    }
+
+}
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -293,11 +293,13 @@ for_window [class="Xfburn"] floating enable
 for_window [class="keepassxc"] floating enable
 for_window [class="garuda-welcome"] floating enable
 for_window [class="Thunar"] floating enable resize set 800 800 move position center
+# for_window [class="Postman"] floating enable resize set 1200 1200 move position center
 
 # window rules, you can find the window class using xprop
-for_window [class=".*"] border pixel 2
+for_window [class=".*"] border pixel 3
 assign [class=URxvt] 1
 assign [class=discord] 3
+assign [class=Postman] 4
 for_window [class=Viewnior|feh|Audacious|File-roller|Lxappearance|Lxtask|Pavucontrol|upgrade2ultimate.sh] floating enable
 for_window [class=URxvt|firedragon|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn|Gimp*|Inkscape|Vlc|Lxappearance|Audacity] focus
 for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Pavucontrol|Exo-helper*|Lxrandr|Arandr] focus
@@ -308,7 +310,7 @@ client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f #2f343f
 client.unfocused            #2f343f #2f343f #d8dee8 #2f343f #2f343f
 client.urgent               #2f343f #2f343f #d8dee8 #2f343f #2f343f
 client.placeholder          #2f343f #2f343f #d8dee8 #2f343f #2f343f
-client.background           #2f343f
+# client.background           #2f343f
 
 
 
@@ -317,8 +319,8 @@ client.background           #2f343f
 #############################
 
 # Set inner/outer gaps
-gaps inner 0
-gaps outer -2
+gaps inner 9
+gaps outer 0
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
@@ -391,14 +393,16 @@ mode "$mode_system" {
 # keybindings for applications
 bindsym $super+b exec --no-startup-id brave
 bindsym $super+g exec --no-startup-id discord
+bindsym $super+p exec --no-startup-id postman
 
 # disable ctrl+d
 # bindsym Ctrl+d mode "default"
 
 # custom autostart
 # exec_always ~/.config/polybar/launch.sh &
-exec --no-startup-id i3-msg 'workspace 1'; exec /usr/bin/kitty -e tmux attach
+exec --no-startup-id i3-msg 'workspace 1'; exec /usr/bin/kitty -e tmux
 exec --no-startup-id sh -c "sleep 2; i3-msg 'workspace 2'; exec /usr/bin/brave"
+exec --no-startup-id i3-msg 'workspace 3; exec /usr/bin/discord'
 # exec --no-startup-id i3-msg 'workspace 3; exec /usr/bin/thunar'
 
 
@@ -444,13 +448,29 @@ for_window [class="dropdown*"] floating enable
 for_window [class="dropdown*"] resize set 1000 800
 for_window [class="dropdown*"] move scratchpad
 for_window [class="dropdown*"] border pixel 5
+
 exec_always --no-startup-id pgrep -f '^kitty --class dropdown1' || kitty --class dropdown1
 bindsym $super+bracketleft [class="dropdown1"] scratchpad show; [class="dropdown1"] move position center
 
-exec_always --no-startup-id pgrep -f '^kitty --class dropdown2 -e htop' || kitty --class dropdown2 -e htop
+exec_always --no-startup-id pgrep -f '^kitty --class dropdown2' || kitty --class dropdown2 -e htop
 bindsym $super+Shift+parenright [class="dropdown2"] scratchpad show; [class="dropdown2"] move position center
 
-exec_always --no-startup-id pgrep -f '^kitty --class dropdown3 -e ranger' || kitty --class dropdown3 -e ranger
+exec_always --no-startup-id pgrep -f '^kitty --class dropdown3' || kitty --class dropdown3 -e ranger
 bindsym $super+bracketright [class="dropdown3"] scratchpad show; [class="dropdown3"] move position center
 
+for_window [class="math"] floating enable
+for_window [class="math"] resize set 800 500
+for_window [class="math"] move scratchpad
+for_window [class="math"] border pixel 5
+
+exec_always --no-startup-id pgrep -f '^kitty --class math' || kitty --class math -e python -q 
+bindsym $super+backslash [class="math"] scratchpad show; [class="math"] move position center 
+
+# for_window [class="api"] floating enable
+# for_window [class="api"] resize set 1200 1200
+# for_window [class="api"] move scratchpad
+# for_window [class="api"] border pixel 5
+#
+# exec_always --no-startup-id pgrep -f '^postman --class api' || postman --class api
+# bindsym $super+Shift+P [class="api"] scratchpad show; [class="api"] move position center
 
