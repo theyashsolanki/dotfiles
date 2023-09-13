@@ -1,4 +1,11 @@
-# dotfiles
+
+# wifi
+
+sudo systemctl start iwd
+
+nmcli d wifi connect SSID password 'passprase'
+
+# dependencies
 
 
 sudo pacman -S fzf ripgrep trash-cli unzip tmux exa zoxide starship npm
@@ -36,3 +43,5 @@ Section "InputClass"
 	Option "TappingButtonMap" "Irm"
 EndSection
 
+
+# use timeshift at the end to backup
