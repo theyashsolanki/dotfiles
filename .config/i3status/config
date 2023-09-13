@@ -18,6 +18,7 @@ general {
   "markup"="pango"
 }
 
+order += "custom brightness"
 order += "disk /"
 #order += "wireless _first_"
 #order += "ethernet _first_"
@@ -31,6 +32,10 @@ order += "battery all"
 #order += "cpu_temperature 4"
 order += "volume master"
 order += "tztime local"
+
+# custom brightness {
+#   command = "echo 'Brightness: $(bash ~/personal/script/brightness_status.sh)'"
+# }
 
 ipv6 {
     format_up = "%ip"
@@ -58,6 +63,7 @@ battery all {
   threshold_type = percentage
   integer_battery_capacity = true
 }
+
 
 tztime local {
 format = "◔ %H:%M:%S | %a. %d.%m.%Y "
