@@ -3,21 +3,37 @@
 
 
 fzf 
+
 ripgrep 
+
 trash-cli 
+
 unzip 
+
 tmux 
+
 exa 
+
 zoxide 
+
 starship 
+
 npm
+
 picom 
+
 feh
+
 sudo pacman -Sy $(pacman -Sgq nerd-fonts)
+
 noto-fonts-emoji
+
 zsh-syntax-highlighting 
+
 zsh-autosuggestions 
+
 zsh-history-substring-search 
+
 mcfly
 
 
