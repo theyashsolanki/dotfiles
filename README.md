@@ -1,30 +1,24 @@
 
-# wifi
-
-sudo systemctl start iwd
-
-nmcli d wifi connect SSID password 'passprase'
-
 # dependencies
 
 
-sudo pacman -S fzf ripgrep trash-cli unzip tmux exa zoxide starship npm
-
-
-
-
+fzf 
+ripgrep 
+trash-cli 
+unzip 
+tmux 
+exa 
+zoxide 
+starship 
+npm
+picom 
+feh
 sudo pacman -Sy $(pacman -Sgq nerd-fonts)
-
-
-sudo pacman -S picom feh
-
-
-
-sudo pacman -S noto-fonts-emoji
-
-
-
-sudo pacman -S zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring-search mcfly
+noto-fonts-emoji
+zsh-syntax-highlighting 
+zsh-autosuggestions 
+zsh-history-substring-search 
+mcfly
 
 
 
@@ -32,7 +26,8 @@ sudo pacman -S zsh-syntax-highlighting zsh-autosuggestions zsh-history-substring
 
 
 
-/etc/X11/xorg.conf.d/30-touchpad.conf
+# /etc/X11/xorg.conf.d/30-touchpad.conf
+
 
 Section "InputClass"
 	Identifier "touchpad"
@@ -43,5 +38,3 @@ Section "InputClass"
 	Option "TappingButtonMap" "Irm"
 EndSection
 
-
-# use timeshift at the end to backup
