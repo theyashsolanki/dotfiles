@@ -231,7 +231,7 @@ bindsym $super+g exec --no-startup-id discord
 
 
 # autostart
-exec --no-startup-id i3-msg 'workspace 1'; exec /usr/bin/kitty -e tmux
+exec --no-startup-id i3-msg 'workspace 1'; exec /usr/bin/kitty -e tmux new-session -d
 exec --no-startup-id sh -c "sleep 3; i3-msg 'workspace 2'; exec /usr/bin/firefox"
 exec --no-startup-id sh -c "sleep 5; exec /usr/bin/discord"
 exec --no-startup-id ~/.fehbg
@@ -284,11 +284,11 @@ for_window [class="dropdown*"] border pixel 5
 exec_always --no-startup-id pgrep -f '^kitty --class dropdown1' || kitty --class dropdown1
 bindsym $super+bracketleft [class="dropdown1"] scratchpad show; [class="dropdown1"] move position center
 
-exec_always --no-startup-id pgrep -f '^kitty --class dropdown2' || kitty --class dropdown2 -e htop
-bindsym $super+Shift+parenright [class="dropdown2"] scratchpad show; [class="dropdown2"] move position center
-
-exec_always --no-startup-id pgrep -f '^kitty --class dropdown3' || kitty --class dropdown3 -e ranger
-bindsym $super+bracketright [class="dropdown3"] scratchpad show; [class="dropdown3"] move position center
+# exec_always --no-startup-id pgrep -f '^kitty --class dropdown2' || kitty --class dropdown2 -e htop
+# bindsym $super+Shift+parenright [class="dropdown2"] scratchpad show; [class="dropdown2"] move position center
+#
+# exec_always --no-startup-id pgrep -f '^kitty --class dropdown3' || kitty --class dropdown3 -e ranger
+# bindsym $super+bracketright [class="dropdown3"] scratchpad show; [class="dropdown3"] move position center
 
 for_window [class="math"] floating enable
 for_window [class="math"] resize set 800 500
