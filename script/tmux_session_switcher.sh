@@ -1,7 +1,13 @@
 #!/bin/bash
 
 # Use fzf with customized preview to select a session
-selected_session=$(tmux list-sessions -F "#{?session_attached,#{session_name} (attached),#{session_name}}" | fzf --preview 'tmux list-windows -t {1} -F "#I: #W - #{window_panes} pane (#{?window_active,active,})"' --preview-window 'up:40%:wrap')
+selected_session=$(
+  tmux list-sessions -F "#{?session_attached,#{session_name} (attached),#{session_name} }" |
+    awk '{print $NF, $0}' |              # Add last visited time as a prefix
+    sort -n |                           # Sort by last visited time numerically
+    cut -d ' ' -f 2- |                   # Remove the first column (last visited time)
+    fzf
+)
 
 # Check if a session was selected
 if [[ -z $selected_session ]]; then
