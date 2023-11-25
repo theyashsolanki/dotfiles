@@ -23,21 +23,20 @@ tmux_sessionizer() {
 
   if [[ -z "$TMUX" ]]; then
     if ! session_exists "$selected_name"; then
-      BUFFER="tmux new-session -d -s '$selected_name' -c '$selected'"
-      zle accept-line
+      BUFFER="tmux new-session -d -s $selected_name -c $selected"
     fi
 
-    BUFFER="tmux attach-session -t '$selected_name'"
+    BUFFER="tmux attach-session -t $selected_name"
     zle accept-line
   else
     current_session=$(tmux display-message -p '#S')
     if [[ "$current_session" != "$selected_name" ]]; then
       if ! session_exists "$selected_name"; then
-        BUFFER="tmux switch-client -t '$selected_name' -c '$selected'"
+        BUFFER="tmux switch-client -t $selected_name -c $selected"
         zle accept-line
       fi
 
-      BUFFER="tmux switch-client -t '$selected_name'"
+      BUFFER="tmux switch-client -t $selected_name"
       zle accept-line
     fi
   fi
