@@ -243,8 +243,12 @@ alias tb='nc termbin.com 9999'
 alias upd="/usr/bin/update"
 
 # tmux session
-source ~/personal/script/tmux_sessionizer_old.sh
-source ~/personal/script/tmux_session_switcher_old.sh
+tmux_sessionizer() {
+  source ~/personal/script/tmux_sw_zsh.sh
+}
+tmux_session_switcher() {
+  source ~/personal/script/tmux_sn_zsh.sh
+}
 
 zle -N tmux_sessionizer
 bindkey '^f' tmux_sessionizer
