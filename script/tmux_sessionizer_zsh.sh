@@ -11,7 +11,7 @@ tmux_sessionizer() {
   if [[ $# -eq 1 ]]; then
     selected="$1"
   else
-    selected=$(find ~ -type d | fzf --preview="exa -1a --group-directories-first {}")
+    selected=$(find ~/personal ~/.config ~/Downloads -type d | fzf --preview="exa -1a --group-directories-first {}")
   fi
 
   if [[ -z "$selected" ]]; then
