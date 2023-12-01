@@ -226,13 +226,14 @@ for_window [class=".*"] border pixel 3
 assign [class=discord] 3
 
 # keybindings for app
-bindsym $super+b exec --no-startup-id firefox
+bindsym $super+b exec --no-startup-id brave
 bindsym $super+g exec --no-startup-id discord
 
 
 # autostart
 exec --no-startup-id i3-msg 'workspace 1'; exec /usr/bin/kitty -e tmux new-session -d
-exec --no-startup-id sh -c "sleep 3; i3-msg 'workspace 2'; exec /usr/bin/firefox"
+exec --no-startup-id /usr/bin/kitty
+exec --no-startup-id sh -c "sleep 3; i3-msg 'workspace 2'; exec /usr/bin/brave"
 exec --no-startup-id sh -c "sleep 5; exec /usr/bin/discord"
 exec --no-startup-id ~/.fehbg
 exec sh -c "picom -b"
