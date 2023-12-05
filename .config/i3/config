@@ -35,7 +35,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
+# set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
@@ -226,17 +226,18 @@ for_window [class=".*"] border pixel 3
 assign [class=discord] 3
 
 # keybindings for app
-bindsym $super+b exec --no-startup-id brave
+bindsym $super+b exec --no-startup-id firefox
 bindsym $super+g exec --no-startup-id discord
 
 
 # autostart
 exec --no-startup-id i3-msg 'workspace 1'; exec /usr/bin/kitty -e tmux new-session -d
 exec --no-startup-id /usr/bin/kitty
-exec --no-startup-id sh -c "sleep 3; i3-msg 'workspace 2'; exec /usr/bin/brave"
+exec --no-startup-id sh -c "sleep 3; i3-msg 'workspace 2'; exec /usr/bin/firefox"
 exec --no-startup-id sh -c "sleep 5; exec /usr/bin/discord"
 exec --no-startup-id ~/.fehbg
-exec sh -c "picom -b"
+exec --no-startup-id picom -b
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 
 # workspace bindings for num keys
