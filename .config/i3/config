@@ -35,10 +35,10 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
-# set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status; exec dunstify "Volume: $(pactl list sinks | grep '^\sVolume:' | tail -n 1 | awk '{print $5}' | cut -d/ -f 2)" -u low -r 123456 -i audio-volume-high-symbolic
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status; exec dunstify "Volume: $(pactl list sinks | grep '^\sVolume:' | tail -n 1 | awk '{print $5}' | cut -d/ -f 2)" -u low -r 123456 -i audio-volume-high-symbolic
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status ; exec dunstify "Muted: $(pactl list sinks | grep '^\sMute:' | awk '{print $2}')" -u low -r 123456 -i audio-volume-high-symbolic
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 
@@ -238,6 +238,7 @@ exec --no-startup-id sh -c "sleep 5; exec /usr/bin/discord"
 exec --no-startup-id ~/.fehbg
 exec --no-startup-id picom -b
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec --no-startup-id flameshot &
 
 
 # workspace bindings for num keys
@@ -282,9 +283,11 @@ for_window [class="dropdown*"] floating enable
 for_window [class="dropdown*"] resize set 1000 800
 for_window [class="dropdown*"] move scratchpad
 for_window [class="dropdown*"] border pixel 5
+no_focus [class="dropdown1"]
 
 exec_always --no-startup-id pgrep -f '^kitty --class dropdown1' || kitty --class dropdown1
-bindsym $super+bracketleft [class="dropdown1"] scratchpad show; [class="dropdown1"] move position center
+bindsym $super+bracketleft [class="dropdown1"] scratchpad show; [class="dropdown1"] floating enable; [class="dropdown1"] move position center
+
 
 # exec_always --no-startup-id pgrep -f '^kitty --class dropdown2' || kitty --class dropdown2 -e htop
 # bindsym $super+Shift+parenright [class="dropdown2"] scratchpad show; [class="dropdown2"] move position center
@@ -310,5 +313,8 @@ bindsym $super+backslash [class="math"] scratchpad show; [class="math"] move pos
 
 
 # Brightness controls
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%; exec dunstify "brightness $(brightnessctl g)%" -u low -r 123456 -i display-brightness-symbolic
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-; exec notify-send "brightness $(brightnessctl g)%" -u low -r 123456 -i display-brightness-symbolic
+
+
+for_window [class="feh"] floating enable
