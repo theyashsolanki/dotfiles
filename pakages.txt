@@ -17,6 +17,7 @@ feh
 nerd-fonts
 noto-fonts-emoji
 noto-fonts-cjk
+noto-fonts
 zsh
 zsh-syntax-highlighting
 zsh-autosuggestions
@@ -24,6 +25,7 @@ zsh-history-substring-search
 bluez
 bluez-utils
 pulseaudio
+pulseaudio-alsa
 pulseaudio-bluetooth
 pavucontrol
 expac
