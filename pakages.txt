@@ -13,6 +13,7 @@ bat
 npm
 ruby
 picom
+brightnessctl
 feh
 nerd-fonts
 noto-fonts-emoji
