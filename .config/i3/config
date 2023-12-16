@@ -36,9 +36,9 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status; exec dunstify "Volume: $(pactl list sinks | grep '^\sVolume:' | tail -n 1 | awk '{print $5}' | cut -d/ -f 2)" -u low -r 123456 -i audio-volume-high-symbolic
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status; exec dunstify "Volume: $(pactl list sinks | grep '^\sVolume:' | tail -n 1 | awk '{print $5}' | cut -d/ -f 2)" -u low -r 123456 -i audio-volume-high-symbolic
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status ; exec dunstify "Muted: $(pactl list sinks | grep '^\sMute:' | awk '{print $2}')" -u low -r 123456 -i audio-volume-high-symbolic
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 
@@ -212,7 +212,7 @@ smart_borders on
 bindsym $super+0 mode "$mode_system"
 set $mode_system (l)ock, (s)uspend, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym s exec i3lock && systemctl suspend, mode "default"
+    bindsym s exec systemctl suspend, mode "default"
     bindsym l exec dm-tool lock, mode "default"
     bindsym Shift+r exec reboot, mode "default"
     bindsym Shift+s exec shutdown now, mode "default"
@@ -227,14 +227,14 @@ assign [class=discord] 3
 
 # keybindings for app
 bindsym $super+b exec --no-startup-id firefox
-bindsym $super+g exec --no-startup-id discord
+bindsym $super+g exec --no-startup-id flatpak run com.discordapp.Discord 
 
 
 # autostart
 exec --no-startup-id i3-msg 'workspace 1'; exec /usr/bin/kitty -e tmux new-session -d
 exec --no-startup-id /usr/bin/kitty
 exec --no-startup-id sh -c "sleep 3; i3-msg 'workspace 2'; exec /usr/bin/firefox"
-exec --no-startup-id sh -c "sleep 5; exec /usr/bin/discord"
+exec --no-startup-id sh -c "sleep 5; exec flatpak run com.discordapp.Discord"
 exec --no-startup-id ~/.fehbg
 exec --no-startup-id picom -b
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
@@ -313,8 +313,8 @@ bindsym $super+backslash [class="math"] scratchpad show; [class="math"] move pos
 
 
 # Brightness controls
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%; exec dunstify "brightness $(brightnessctl g)%" -u low -r 123456 -i display-brightness-symbolic
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-; exec notify-send "brightness $(brightnessctl g)%" -u low -r 123456 -i display-brightness-symbolic
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
-
+# make feh floating
 for_window [class="feh"] floating enable
