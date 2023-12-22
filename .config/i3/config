@@ -56,7 +56,9 @@ bindsym $super+Return exec kitty
 bindsym $super+q kill
 
 # start dmenu (a program launcher)
-bindsym $super+d exec --no-startup-id dmenu_run
+bindsym $super+d exec --no-startup-id /home/yash/.config/rofi/launchers/type-2/launcher.sh
+bindsym $super+e exec --no-startup-id rofimoji --action copy
+bindsym  $super+p exec --no-startup-id passmenu
 # A more modern dmenu replacement is rofi:
 # bindcode $super+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -98,7 +100,7 @@ bindsym $super+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $super+s layout stacking
 bindsym $super+t layout tabbed
-bindsym $super+e layout toggle split
+bindsym $super+Shift+s layout toggle split
 
 # toggle tiling / floating
 bindsym $super+Shift+space floating toggle
@@ -197,16 +199,18 @@ bindsym $super+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-}
+# bar {
+#         status_command i3status
+# }
 
 
-gaps inner 0
+gaps inner 5
 gaps outer 0
 
 smart_gaps on
 smart_borders on
+
+focus_follows_mouse yes
 
 # Set shut down, restart and locking features
 bindsym $super+0 mode "$mode_system"
@@ -224,10 +228,13 @@ mode "$mode_system" {
 
 for_window [class=".*"] border pixel 3
 assign [class=discord] 3
+assign [class=steam] 4
+assign [class=heroic] 4
 
 # keybindings for app
 bindsym $super+b exec --no-startup-id firefox
 bindsym $super+g exec --no-startup-id flatpak run com.discordapp.Discord 
+bindsym $alt+f exec --no-startup-id flameshot full
 
 
 # autostart
@@ -239,6 +246,7 @@ exec --no-startup-id ~/.fehbg
 exec --no-startup-id picom -b
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id flameshot &
+exec_always /home/yash/.config/polybar/launch.sh
 
 
 # workspace bindings for num keys
@@ -282,7 +290,7 @@ bindcode $alt+Shift+90 move container to workspace 10; workspace 10
 for_window [class="dropdown*"] floating enable 
 for_window [class="dropdown*"] resize set 1000 800
 for_window [class="dropdown*"] move scratchpad
-for_window [class="dropdown*"] border pixel 5
+for_window [class="dropdown*"] border pixel 3
 no_focus [class="dropdown1"]
 
 exec_always --no-startup-id pgrep -f '^kitty --class dropdown1' || kitty --class dropdown1
@@ -304,7 +312,7 @@ exec_always --no-startup-id pgrep -f '^kitty --class math' || kitty --class math
 bindsym $super+backslash [class="math"] scratchpad show; [class="math"] move position center 
 
 # colour of border, background, text, indicator, and child_border
-# client.focused              #bf616a #2f343f #d8dee8 #bf616a #00FFFF
+# client.focused              #bf616a #2f343f #d8dee8 #bf616a #61AFEF
 # client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f #2f343f
 # client.unfocused            #2f343f #2f343f #d8dee8 #2f343f #2f343f
 # client.urgent               #2f343f #2f343f #d8dee8 #2f343f #2f343f
@@ -318,3 +326,5 @@ bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
 # make feh floating
 for_window [class="feh"] floating enable
+
+
