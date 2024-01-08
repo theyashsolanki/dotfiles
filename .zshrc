@@ -66,3 +66,6 @@ SAVEHIST=10000
 # export MCFLY_INTERFACE_VIEW=BOTTOM
 # export MCFLY_RESULTS_SORT=LAST_RUN
 # eval "$(mcfly init zsh)"
+
+export DENO_INSTALL="/home/yash/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
