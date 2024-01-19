@@ -6,6 +6,8 @@ sudo dnf config-manager --set-enabled fedora-cisco-openh264
 
 sudo dnf install gstreamer1-plugin-openh264 mozilla-openh264
 
+flatpak install com.discordapp.Discord
+
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
 
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/zsh-autosuggestions
