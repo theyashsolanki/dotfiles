@@ -19,7 +19,7 @@ switch_session() {
 if [[ $# -eq 1 ]]; then
   selected="$1"
 else
-  selected=$(find ~/personal ~/.config ~/dotfiles ~/Downloads -type d | fzf --preview="eza -1a --group-directories-first {}")
+  selected=$(find ~/personal ~/work ~/.config ~/dotfiles ~/Downloads -type d | fzf --preview="eza -1a --group-directories-first {}")
 fi
 
 # Check if selection is empty

@@ -1,14 +1,14 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 40,
-    "width":1900,
+    "height": 10,
+    //"width":1900,
     "margin": "0 0 0 0",
     "spacing":0,
 
     // Choose the order of the modules
 
-    "modules-left": ["custom/launcher", "hyprland/workspaces", "hyprland/window"],
+    "modules-left": ["hyprland/workspaces", "hyprland/window"],
     "modules-right": ["custom/network_traffic","backlight", "custom/keyboard-layout",  "temperature",  "cpu", "memory", "battery", "pulseaudio", "network", "tray", "idle_inhibitor", "clock","custom/power"],
 
  // Modules configuration
@@ -43,19 +43,19 @@
     "idle_inhibitor": {
         "format": "{icon}",
        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
+            "activated": " ",
+            "deactivated": " "
+        },
     },
     "tray": {
         "icon-size": 20,
-        "spacing": 5
+        "spacing": 2
     },
     "clock": {
         "tooltip-format": "<big>{:%A, %d.%B %Y }</big>\n<tt><small>{calendar}</small></tt>",
-        "format": " {:%a %d %b  %I:%M %p}",	//12 hour format
-        //"format": " {:%a %d %b  %H:%M}",	//24 hour format
-        "format-alt": " {:%d/%m/%Y  %H:%M:%S}",
+        "format": "  {:%a %d %b    %I:%M %p}",	//12 hour format
+        //"format": "  {:%a %d %b   %H:%M}",	//24 hour format
+        "format-alt": "  {:%d/%m/%Y    %H:%M:%S}",
         "timezones": [ "Asia/Kolkata" ],
         //"max-length": 200
         "interval": 1,

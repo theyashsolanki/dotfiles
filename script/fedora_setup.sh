@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo dnf copr enable atim/lazygit -y
-sudo dnf install -y i3 git vim neovim zsh tmux fzf unzip go nodejs kitty trash-cli tldr lazygit python-devel g++ brightnessctl pavucontrol picom dunst polybar rofi eza bat feh polkit-gnome xclip akmod-nvidia xorg-x11-drv-nvidia-cuda 
+sudo dnf install -y i3 git vim neovim zsh tmux fzf unzip go nodejs kitty trash-cli tldr lazygit python-devel g++ brightnessctl pavucontrol picom dunst polybar rofi eza bat feh polkit-gnome xclip 
 
 sudo dnf config-manager --set-enabled fedora-cisco-openh264
 
